@@ -1,4 +1,6 @@
 language: java
 jdk:
         - openjdk11
-script: ./gradle build
+script:
+        - ./gradlew build --scan -s
+
