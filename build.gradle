@@ -6,14 +6,20 @@ dependencies {
    testCompile 'junit:junit:4.12'
 }
 
+sourceSets {
+  test {
+    java {
+      srcDir "src/test"
+    }
+  }
+  main {
+    java {
+      srcDir "src/main"
+    }
+  }
+}
+
 test {
   useJUnit()
 }
 
-sourceSets {
-  tests {
-    java {
-      srcDir 'src/test'
-    }
-  }
-}
