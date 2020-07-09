@@ -1,5 +1,5 @@
 # jenkins
-[![Build Status](https://travis-ci.org/prikkeldraad/jenkins.png?branch=master)](https://travis-ci.org/prikkeldraad/jenkins/)
+[![Build Status](https://travis-ci.com/prikkeldraad/jenkins.svg?branch=master)](https://travis-ci.com/prikkeldraad/jenkins)
 
 Packages for use in Jenkins as a shared library to help build pipelines
 
