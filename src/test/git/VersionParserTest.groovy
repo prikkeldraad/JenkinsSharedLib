@@ -1,5 +1,6 @@
 import nl.prikkeldraad.git.VersionParser
 
+@RunWith
 class VersionParserTestCase extends GroovyTestCase {
     private vp
     
