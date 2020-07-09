@@ -3,7 +3,7 @@ apply plugin: 'java'
 // group nl.prikkeldraad
 
 dependencies {
-   testCompile 'junit:junit:4.11'
+   testCompile 'junit:junit:4.12'
 }
 
 test {
