@@ -3,7 +3,7 @@ apply plugin: 'groovy'
 // group nl.prikkeldraad
 
 dependencies {
-   test 'junit:junit:4.12'
+   testImplementation 'junit:junit:4.12'
 }
 
 sourceSets {
