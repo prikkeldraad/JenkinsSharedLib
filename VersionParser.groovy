@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-package nl.prikkeldraad.JenkinsSharedLib
+package nl.prikkeldraad.jenkins
 
 class VersionParser implements Serializable {
     public String number
@@ -11,12 +11,26 @@ class VersionParser implements Serializable {
     */
     public context
     
+    /**
+    * @var String
+    */
     private String _branch
+
+    /**
+    * @var String
+    */
     private String _version
+
+    /**
+    * @var Int
+    */
     private String _build
     
     /**
-    * we can't use methods in constructor so we just assign
+    * Assign version information
+    * @param String branch
+    * @param String version
+    * @param Int build number
     */
     VersionParser(branch, version, build) {
         this._branch = branch
@@ -24,17 +38,22 @@ class VersionParser implements Serializable {
         this._build = build
     }
     
-    // set branch prop and call parse_version
+    /**
+    * Set branch prop and call parse_version
+    */
     private void parse() {
         def matches = (this._branch =~ /^(master|release|develop|feature)\/?(.*)/)
         def feature = null
 
+	// check if there is a Jira ticker number and replace - in the number with _ 
+	// because else it would be part of the version numbering pattern
         try {
             feature = matches[0][2].replace("-", "_")
         } catch (java.lang.IndexOutOfBoundsException e) {
             void
         }    
         
+	// check for branch names
         try {
             this.branch = matches[0][1];
         } catch (java.lang.NullPointerException | java.lang.IndexOutOfBoundsException e) {
@@ -48,6 +67,10 @@ class VersionParser implements Serializable {
         this.parse_version(feature)
     }
 
+    /**
+    * Output to Jenkins context or directly to screen
+    * for testing we want a method to output to screen instead to at that time non-existing Jenkins
+    */
     private void echo (str) {
         if (this.context) {
             this.context.echo str
@@ -56,6 +79,12 @@ class VersionParser implements Serializable {
         }
     }
     
+    /**
+    * rebuild a version number
+    * - remove snapshot from the name, if used
+    * - check branch and add signature if not on master
+    * @param String Jira issue number (optional)
+    */
     private void parse_version(feature) {
         // check for SNAPSHOT in the name
         if (this._version.contains('-SNAPSHOT')) {
@@ -67,21 +96,21 @@ class VersionParser implements Serializable {
         }
         
         switch (this.branch) {
-			case 'master':
-				this.number = "${this._version}-${this._build}"
-				break
+		case 'master':
+			this.number = "${this._version}-${this._build}"
+			break
 
-			case 'release':
-				this.number = "${this._version}-beta-${this._build}"
-				break
+		case 'release':
+			this.number = "${this._version}-beta-${this._build}"
+			break
 					
-			case 'develop':
-				this.number = "${this._version}-alpha-${this._build}"
-				break
+		case 'develop':
+			this.number = "${this._version}-alpha-${this._build}"
+			break
 				
-			case 'feature':
-				this.number = "${this._version}-${feature}-${this._build}"
-				break
+		case 'feature':
+			this.number = "${this._version}-${feature}-${this._build}"
+			break
         }
     }
     
