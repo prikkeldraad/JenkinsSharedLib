@@ -11,7 +11,8 @@ class VersionParserTestCase extends GroovyTestCase {
                 
         this.vp.parse()
     }
-    
+
+    @Test
     void testFullFormat() {
         def number = this.vp.format("%M.%m.%p-%b")
         assertEquals(number, "1.2.3-1234")
