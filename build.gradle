@@ -9,12 +9,12 @@ dependencies {
 sourceSets {
   test {
     java {
-      srcDir "src/test"
+      srcDir "src/test/**"
     }
   }
   main {
     java {
-      srcDir "src/main"
+      srcDir "src/main/**"
     }
   }
 }
