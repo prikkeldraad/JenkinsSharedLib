@@ -9,3 +9,11 @@ dependencies {
 test {
   useJUnit()
 }
+
+sourceSets {
+  tests {
+    java {
+      srcDir 'src/test'
+    }
+  }
+}
