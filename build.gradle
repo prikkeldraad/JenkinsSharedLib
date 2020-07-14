@@ -1,20 +1,30 @@
-apply plugin: 'groovy'
+plugins {
+  id 'groovy'
+}
 
-// group nl.prikkeldraad
+repositories {
+  mavenCentral()
+}
 
 dependencies {
-   testImplementation 'junit:junit:4.12'
+  implementation 'org.codehaus.groovy:groovy-all:2.4.15'
+  testImplementation 'org.codehaus.groovy:groovy-all:2.4.15'
+  testCompile (
+    'junit:junit:4.12',
+    'org.codehaus.groovy:groovy-all:2.4.15'
+  )
 }
 
 sourceSets {
-  test {
-    java {
-      srcDir "src/test/**"
+  main {
+    groovy {
+      srcDirs = ["src/main/groovy"]
     }
   }
-  main {
-    java {
-      srcDir "src/main/**"
+
+  test {
+    groovy {
+      srcDirs = ["src/test/groovy"]
     }
   }
 }

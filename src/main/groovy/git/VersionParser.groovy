@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-package nl.prikkeldraad.jenkins
+//package nl.prikkeldraad.jenkins
 
 class VersionParser implements Serializable {
     public String number

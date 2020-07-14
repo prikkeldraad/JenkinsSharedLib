@@ -1,19 +1,17 @@
-import nl.prikkeldraad.git.VersionParser
+//import git.VersionParser
 
-@RunWith
 class VersionParserTestCase extends GroovyTestCase {
     private vp
     
     void setUp() {
         this.vp = new VersionParser(
-            "master, 
+            "master", 
             "1.2.3", 
             1234)
                 
         this.vp.parse()
     }
 
-    @Test
     void testFullFormat() {
         def number = this.vp.format("%M.%m.%p-%b")
         assertEquals(number, "1.2.3-1234")
