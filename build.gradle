@@ -1,3 +1,9 @@
+/**
+* build.gradle
+* 
+* Depending on the version of groovy a warning might be issued about
+* illegal reflective access. This message will be gone in versions > 2
+*/
 plugins {
   id 'groovy'
 }
@@ -6,12 +12,22 @@ repositories {
   mavenCentral()
 }
 
+// set correct versions according to Jenkins version used
+def groovy_version = '2.4.12'
+def groovy_cps_version = '1.30'
+
 dependencies {
-  implementation 'org.codehaus.groovy:groovy-all:2.4.15'
-  testImplementation 'org.codehaus.groovy:groovy-all:2.4.15'
-  testCompile (
-    'junit:junit:4.12',
-    'org.codehaus.groovy:groovy-all:2.4.15'
+  implementation (
+    // use all groovy packages
+    "org.codehaus.groovy:groovy-all:${groovy_version}",
+
+    // use cps for jenkins
+    "com.cloudbees:groovy-cps:${groovy_cps_version}"
+  )
+
+  testImplementation (
+    // test with junit
+    'junit:junit:4.12'
   )
 }
 
